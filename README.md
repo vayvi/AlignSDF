@@ -94,3 +94,44 @@ year         = {2022},
 Some of the codes are built upon [Grasping Field](https://github.com/korrawe/grasping_field), [DeepSDF](https://github.com/facebookresearch/DeepSDF), [manopth](https://github.com/hassony2/manopth) and [PoseNet](https://github.com/mks0601/3DMPPE_POSENET_RELEASE).
 Thanks to them for their great work! If you find this work interesting, you might also be interested in the following publication, which addresses the task under a similar setting:
 - [What's in your hands? 3D Reconstruction of Generic Objects in Hands](https://judyye.github.io/ihoi/), [Ye](https://judyye.github.io/) et al, CVPR 2022
+
+
+
+
+
+### Our trains
+
+The get_mini_split_file.py extracts the .json file necessary for training that's been moved to experiments. (no need to reuse it)
+
+You should create an empty outputs folder before training.
+
+You should create an empty data folder as well.
+
+Download the obman dataset files from google drive.
+
+
+```
+${alignsdf}
+|-- data
+|   |-- obman
+|   |   |-- train
+|   |   |   |-- rgb (found in obman data folder, access should be demanded from the obman official website, try this link first https://drive.google.com/file/d/16dIl2tl4vXVSgtka_qPCmDphjJE3yr-u/view?usp=share_link )
+|   |   |   |-- meta
+|   |   |   |-- sdf_hand (renamed from sdf_hand_mini)
+|   |   |   |-- sdf_obj (renamed from sdf_obj_mini)
+|   |   |   |-- norm 
+|   |   |-- test
+```             (no changes to data online)
+
+
+
+
+## Training
+Before the training process, create a `outputs` directory under `${alignsdf}` to save outputs. You could train the baseline (i.e., the re-implementation of [grasping field](https://arxiv.org/pdf/2008.04451.pdf)):
+```
+bash dist_train.sh 1 6666 -e experiments/obman/10k_1e2d_mlp5.json
+```
+You could launch the training of our method through the script shown below:
+```
+bash dist_train.sh 1 6666 -e experiments/obman/10k_1e2d_mlp5.json --mano --obj_pose --point_size 9 --encode both --ocrw 0
+```

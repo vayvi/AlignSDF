@@ -120,21 +120,26 @@ ${alignsdf}
 |   |   |   |-- sdf_hand (renamed from sdf_hand_mini)
 |   |   |   |-- sdf_obj (renamed from sdf_obj_mini)
 |   |   |   |-- norm 
-|   |   |-- test
-```             (no changes to data online)
+|   |   |-- test (no changes to data online)
+```             
 
 
 
 
-## Training
+### Training
 
 Dont forget to setup the conda environment and activate it 
 
 Before the training process, create a `outputs` directory under `${alignsdf}` to save outputs. You could train the baseline (i.e., the re-implementation of [grasping field](https://arxiv.org/pdf/2008.04451.pdf)):
+
+
 ```
 bash dist_train.sh 1 6666 -e experiments/obman/10k_1e2d_mlp5.json
 ```
+
 You could launch the training of our method through the script shown below:
+
+
 ```
 bash dist_train.sh 1 6666 -e experiments/obman/10k_1e2d_mlp5.json --mano --obj_pose --point_size 9 --encode both --ocrw 0
 ```
